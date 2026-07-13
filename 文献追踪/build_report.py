@@ -250,6 +250,14 @@ def build_html(data, stats, date_tag):
     line-height:1.75; -webkit-font-smoothing:antialiased; }}
   .page {{ max-width:960px; margin:0 auto; background:var(--paper); min-height:100vh; }}
 
+  /* 导航栏 */
+  .nav-bar {{ display:flex; justify-content:space-between; align-items:center;
+    padding:10px 30px; background:var(--rule); color:#fff; }}
+  .nav-bar a {{ color:#fff; text-decoration:none; font-size:13px; letter-spacing:1px;
+    padding:6px 16px; border:1px solid rgba(255,255,255,0.3); transition:all .2s; }}
+  .nav-bar a:hover {{ background:rgba(255,255,255,0.15); border-color:rgba(255,255,255,0.6); }}
+  .nav-bar .nav-title {{ font-size:12px; letter-spacing:3px; opacity:0.7; }}
+
   /* 报头 */
   .masthead {{ text-align:center; padding:36px 40px 18px; border-bottom:4px double var(--rule); }}
   .masthead-brand {{ font-size:11px; letter-spacing:6px; color:var(--ink2); }}
@@ -325,6 +333,12 @@ def build_html(data, stats, date_tag):
 </head>
 <body>
 <div class="page">
+
+  <nav class="nav-bar">
+    <a href="../index.html">← 返回主页</a>
+    <span class="nav-title">学术前沿观察 · {year} 第 {week} 期</span>
+    <a href="../index.html">全部期刊</a>
+  </nav>
 
   <header class="masthead">
     <div class="masthead-brand">ACADEMIC FRONTIER OBSERVER</div>
