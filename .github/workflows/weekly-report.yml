@@ -2,8 +2,8 @@ name: 文献追踪周报自动生成
 
 on:
   schedule:
-    # 每周一早上 10:00 (UTC+8) 自动执行
-    - cron: '0 2 * * 1'  # UTC 时间，UTC+8 是 10:00
+    # 每天早上 10:00 (UTC+8) 自动执行
+    - cron: '0 2 * * *'  # UTC 时间，UTC+8 是 10:00
   workflow_dispatch:      # 支持手动触发
 
 jobs:
