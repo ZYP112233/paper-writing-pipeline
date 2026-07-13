@@ -1,0 +1,15 @@
+# 文献追踪去重状态（不提交，每台机器独立维护）
+文献追踪/.rss_state.json
+
+# Python
+__pycache__/
+*.pyc
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+
+# OS
+Thumbs.db
+.DS_Store

@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中国就业观察 | 2025年度就业景气报告</title>
+<style>
+  :root {
+    --bg: #f5f1eb;
+    --paper: #faf7f2;
+    --ink: #1a1a1a;
+    --ink-light: #4a4a4a;
+    --accent: #8b1a1a;
+    --accent-light: #c44;
+    --rule: #2a2a2a;
+    --rule-light: #d0c8be;
+    --tag-bg: #ede8df;
+    --highlight: #fff8dc;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Noto Serif SC", "Source Han Serif CN", "STSong", "SimSun", Georgia, "Times New Roman", serif;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    max-width: 960px;
+    margin: 0 auto;
+    background: var(--paper);
+    min-height: 100vh;
+  }
+
+  /* ── 报头 ── */
+  .masthead {
+    text-align: center;
+    padding: 36px 40px 0;
+    border-bottom: 4px double var(--rule);
+  }
+  .masthead-brand {
+    font-size: 11px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 8px;
+  }
+  .masthead-title {
+    font-size: 42px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    line-height: 1.15;
+    color: var(--ink);
+  }
+  .masthead-subtitle {
+    font-size: 13px;
+    color: var(--ink-light);
+    margin-top: 6px;
+    letter-spacing: 2px;
+  }
+  .masthead-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--ink-light);
+    padding: 10px 0;
+    border-top: 1px solid var(--rule-light);
+    margin-top: 12px;
+    letter-spacing: 1px;
+  }
+
+  /* ── 导语区 ── */
+  .lead {
+    padding: 28px 40px;
+    border-bottom: 1px solid var(--rule-light);
+  }
+  .lead-kicker {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .lead-title {
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1.35;
+    margin-bottom: 14px;
+    color: var(--ink);
+  }
+  .lead-standfirst {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--ink-light);
+    font-style: italic;
+  }
+
+  /* ── 核心指标条 ── */
+  .metrics-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 2px solid var(--rule);
+  }
+  .metric {
+    text-align: center;
+    padding: 20px 10px;
+    border-right: 1px solid var(--rule-light);
+  }
+  .metric:last-child { border-right: none; }
+  .metric-value {
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1.1;
+  }
+  .metric-unit {
+    font-size: 14px;
+    font-weight: 400;
+  }
+  .metric-label {
+    font-size: 11px;
+    color: var(--ink-light);
+    margin-top: 6px;
+    letter-spacing: 1px;
+  }
+
+  /* ── 正文区 ── */
+  .content {
+    padding: 28px 40px;
+  }
+  .section-rule {
+    border: none;
+    border-top: 2px solid var(--rule);
+    margin: 28px 0;
+  }
+  .section-title {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 16px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--rule-light);
+    color: var(--ink);
+  }
+
+  /* 正文段落 */
+  .body-text {
+    font-size: 15px;
+    line-height: 1.85;
+    text-align: justify;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+  .body-text::first-letter {
+    font-size: 2.4em;
+    float: left;
+    line-height: 0.85;
+    margin-right: 6px;
+    margin-top: 4px;
+    font-weight: 900;
+    color: var(--accent);
+  }
+  .body-text + .body-text::first-letter {
+    font-size: inherit;
+    float: none;
+    line-height: inherit;
+    margin: 0;
+    font-weight: inherit;
+    color: inherit;
+  }
+
+  /* 两栏布局 */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+  .two-col > div {
+    font-size: 14px;
+    line-height: 1.8;
+    text-align: justify;
+  }
+
+  /* ── SVG 图表容器 ── */
+  .chart-container {
+    margin: 20px 0;
+    text-align: center;
+  }
+  .chart-container svg {
+    max-width: 100%;
+    height: auto;
+  }
+  .chart-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+    text-align: center;
+  }
+  .chart-caption {
+    font-size: 11px;
+    color: var(--ink-light);
+    margin-top: 6px;
+    text-align: center;
+    font-style: italic;
+  }
+
+  /* ── 议题卡片 ── */
+  .topic-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .topic-card {
+    border: 1px solid var(--rule-light);
+    padding: 16px;
+    background: var(--paper);
+  }
+  .topic-card-num {
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .topic-card-label {
+    font-size: 11px;
+    color: var(--ink-light);
+    margin-top: 4px;
+    letter-spacing: 1px;
+  }
+  .topic-card-desc {
+    font-size: 12.5px;
+    color: var(--ink-light);
+    margin-top: 10px;
+    line-height: 1.6;
+  }
+
+  /* ── 页脚 ── */
+  .footer {
+    border-top: 3px double var(--rule);
+    padding: 20px 40px 32px;
+    font-size: 11px;
+    color: var(--ink-light);
+    line-height: 1.7;
+  }
+  .footer-title {
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 6px;
+    letter-spacing: 2px;
+    font-size: 11px;
+  }
+
+  /* ── 响应式 ── */
+  @media (max-width: 720px) {
+    .masthead-title { font-size: 28px; }
+    .lead { padding: 20px 20px; }
+    .content { padding: 20px 20px; }
+    .metrics-bar { grid-template-columns: repeat(2, 1fr); }
+    .metrics-bar .metric:nth-child(2) { border-right: none; }
+    .two-col { grid-template-columns: 1fr; gap: 16px; }
+    .topic-cards { grid-template-columns: 1fr; }
+    .masthead { padding: 24px 20px 0; }
+    .footer { padding: 16px 20px 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── 报头 ── -->
+  <header class="masthead">
+    <div class="masthead-brand">China Employment Observer</div>
+    <div class="masthead-title">中国就业观察</div>
+    <div class="masthead-subtitle">2025年度就业景气年度报告</div>
+    <div class="masthead-meta">
+      <span>2025年度 / 年度报告</span>
+      <span>数据来源：国家统计局</span>
+      <span>内部参考</span>
+    </div>
+  </header>
+
+  <!-- ── 导语 ── -->
+  <section class="lead">
+    <div class="lead-kicker">年度概览</div>
+    <h1 class="lead-title">总量稳定下的结构性分化：2025年中国就业市场的韧性与挑战</h1>
+    <p class="lead-standfirst">
+      2025年中国就业市场在复杂外部环境下展现出超预期韧性。全年城镇新增就业1267万人，完成年度目标；
+      城镇调查失业率均值5.2%，低于预期控制目标。然而，青年就业压力持续、结构性招工难与慢就业现象并存，
+      就业市场的"总量稳、结构分"特征愈发显著。
+    </p>
+  </section>
+
+  <!-- ── 核心指标条 ── -->
+  <div class="metrics-bar">
+    <div class="metric">
+      <div class="metric-value">1267<span class="metric-unit">万</span></div>
+      <div class="metric-label">城镇新增就业</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value">5.2<span class="metric-unit">%</span></div>
+      <div class="metric-label">调查失业率均值</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value">72504<span class="metric-unit">万</span></div>
+      <div class="metric-label">全国就业人员</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value">65.6<span class="metric-unit">%</span></div>
+      <div class="metric-label">城镇就业占比</div>
+    </div>
+  </div>
+
+  <!-- ── 正文 ── -->
+  <div class="content">
+
+    <p class="body-text">
+      从全年数据看，2025年中国就业市场呈现出"总量稳、结构分"的典型特征。城镇新增就业1267万人，超额完成1200万人的年度目标，这一数字在全球经济放缓背景下尤为难得。全国就业人员总量达72504万人，其中城镇就业人员占比升至65.6%，城镇化进程对就业结构的塑造作用持续显现。城镇调查失业率全年均值5.2%，低于5.5%左右的预期控制目标，显示劳动力市场整体保持平稳。
+    </p>
+
+    <p class="body-text">
+      然而，总量稳定之下，结构性矛盾愈发凸显。青年群体（16-24岁）失业率在毕业季一度攀升至高位，尽管后续有所回落，但青年就业压力仍是全年最突出的议题之一。与此同时，制造业、服务业部分岗位面临"招工难"，而高校毕业生中"慢就业""缓就业"现象增多，反映出劳动力供需的结构性错配。技术进步、产业转型与教育体系之间的张力，正在重塑中国就业市场的底层逻辑。
+    </p>
+
+    <hr class="section-rule">
+
+    <!-- ── 图表一：月度失业率折线 ── -->
+    <div class="chart-title">2025年全国城镇调查失业率月度走势</div>
+    <div class="chart-container">
+      <svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg">
+        <!-- 坐标轴 -->
+        <line x1="60" y1="200" x2="660" y2="200" stroke="#2a2a2a" stroke-width="1"/>
+        <line x1="60" y1="20" x2="60" y2="200" stroke="#2a2a2a" stroke-width="1"/>
+
+        <!-- 5%参考线 -->
+        <line x1="60" y1="140" x2="660" y2="140" stroke="#8b1a1a" stroke-width="1" stroke-dasharray="4,2" opacity="0.5"/>
+        <text x="665" y="144" font-size="10" fill="#8b1a1a">5.0%</text>
+
+        <!-- 网格线 -->
+        <line x1="60" y1="20" x2="660" y2="20" stroke="#d0c8be" stroke-width="0.5"/>
+        <line x1="60" y1="60" x2="660" y2="60" stroke="#d0c8be" stroke-width="0.5"/>
+        <line x1="60" y1="100" x2="660" y2="100" stroke="#d0c8be" stroke-width="0.5"/>
+        <line x1="60" y1="180" x2="660" y2="180" stroke="#d0c8be" stroke-width="0.5"/>
+
+        <!-- Y轴标签 -->
+        <text x="50" y="25" text-anchor="end" font-size="9" fill="#4a4a4a">6.0%</text>
+        <text x="50" y="65" text-anchor="end" font-size="9" fill="#4a4a4a">5.5%</text>
+        <text x="50" y="105" text-anchor="end" font-size="9" fill="#4a4a4a">5.0%</text>
+        <text x="50" y="185" text-anchor="end" font-size="9" fill="#4a4a4a">4.5%</text>
+
+        <!-- 折线数据（示意）：1月5.2%, 2月5.3%, 3月5.1%, 4月5.0%, 5月5.0%, 6月5.2%, 7月5.3%, 8月5.1%, 9月5.2%, 10月5.0%, 11月5.0%, 12月5.1% -->
+        <polyline points="110,100 160,90 210,120 260,140 310,140 360,100 410,90 460,120 510,100 560,140 610,140 660,120" 
+                  fill="none" stroke="#8b1a1a" stroke-width="2.5"/>
+        
+        <!-- 数据点 -->
+        <circle cx="110" cy="100" r="3" fill="#8b1a1a"/>
+        <circle cx="160" cy="90" r="3" fill="#8b1a1a"/>
+        <circle cx="210" cy="120" r="3" fill="#8b1a1a"/>
+        <circle cx="260" cy="140" r="3" fill="#8b1a1a"/>
+        <circle cx="310" cy="140" r="3" fill="#8b1a1a"/>
+        <circle cx="360" cy="100" r="3" fill="#8b1a1a"/>
+        <circle cx="410" cy="90" r="3" fill="#8b1a1a"/>
+        <circle cx="460" cy="120" r="3" fill="#8b1a1a"/>
+        <circle cx="510" cy="100" r="3" fill="#8b1a1a"/>
+        <circle cx="560" cy="140" r="3" fill="#8b1a1a"/>
+        <circle cx="610" cy="140" r="3" fill="#8b1a1a"/>
+        <circle cx="660" cy="120" r="3" fill="#8b1a1a"/>
+
+        <!-- X轴标签 -->
+        <text x="110" y="220" text-anchor="middle" font-size="10" fill="#4a4a4a">1月</text>
+        <text x="160" y="220" text-anchor="middle" font-size="10" fill="#4a4a4a">2月</text>
+        <text x="210" y="220" text-anchor="middle" font-size="10" fill="#4a4a4a">3月</text>
+        <text x="260" y="220" text-anchor="middle" font-size="10" fill="#4a4a4a">4月</text>
+        <text x="310" y="220" text-anchor="middle" font-size="10" fill="#4a4a4a">5月</text>
+        <text x="360" y="220" text-anchor="middle" font-size="10" fill="#4a4a4a">6月</text>
+        <text x="410" y="220" text-anchor="middle" font-size="10" fill="#4a4a4a">7月</text>
+        <text x="460" y="220" text-anchor="middle" font-size="10" fill="#4a4a4a">8月</text>
+        <text x="510" y="220" text-anchor="middle" font-size="10" fill="#4a4a4a">9月</text>
+        <text x="560" y="220" text-anchor="middle" font-size="10" fill="#4a4a4a">10月</text>
+        <text x="610" y="220" text-anchor="middle" font-size="10" fill="#4a4a4a">11月</text>
+        <text x="660" y="220" text-anchor="middle" font-size="10" fill="#4a4a4a">12月</text>
+
+        <!-- 图例 -->
+        <line x1="250" y1="245" x2="270" y2="245" stroke="#8b1a1a" stroke-width="2"/>
+        <text x="275" y="250" font-size="10" fill="#4a4a4a">全国城镇调查失业率</text>
+        <line x1="420" y1="245" x2="440" y2="245" stroke="#8b1a1a" stroke-width="1" stroke-dasharray="4,2" opacity="0.5"/>
+        <text x="445" y="250" font-size="10" fill="#4a4a4a">5%参考线</text>
+      </svg>
+    </div>
+    <div class="chart-caption">数据来源：国家统计局 | 注：示意测算，实际月度数据以统计局公报为准</div>
+
+    <hr class="section-rule">
+
+    <!-- ── 图表二：分年龄段失业率 ── -->
+    <div class="chart-title">分年龄段失业率对比（2025年均值）</div>
+    <div class="chart-container">
+      <svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg">
+        <!-- 坐标轴 -->
+        <line x1="80" y1="200" x2="660" y2="200" stroke="#2a2a2a" stroke-width="1"/>
+        <line x1="80" y1="20" x2="80" y2="200" stroke="#2a2a2a" stroke-width="1"/>
+
+        <!-- 网格线 -->
+        <line x1="80" y1="20" x2="660" y2="20" stroke="#d0c8be" stroke-width="0.5"/>
+        <line x1="80" y1="60" x2="660" y2="60" stroke="#d0c8be" stroke-width="0.5"/>
+        <line x1="80" y1="100" x2="660" y2="100" stroke="#d0c8be" stroke-width="0.5"/>
+        <line x1="80" y1="140" x2="660" y2="140" stroke="#d0c8be" stroke-width="0.5"/>
+        <line x1="80" y1="180" x2="660" y2="180" stroke="#d0c8be" stroke-width="0.5"/>
+
+        <!-- Y轴标签 -->
+        <text x="70" y="25" text-anchor="end" font-size="9" fill="#4a4a4a">20%</text>
+        <text x="70" y="65" text-anchor="end" font-size="9" fill="#4a4a4a">15%</text>
+        <text x="70" y="105" text-anchor="end" font-size="9" fill="#4a4a4a">10%</text>
+        <text x="70" y="145" text-anchor="end" font-size="9" fill="#4a4a4a">5%</text>
+        <text x="70" y="185" text-anchor="end" font-size="9" fill="#4a4a4a">0%</text>
+
+        <!-- 柱状图（示意） -->
+        <!-- 16-24岁：约15% -->
+        <rect x="140" y="80" width="80" height="120" fill="#8b1a1a" opacity="0.9"/>
+        <text x="180" y="72" text-anchor="middle" font-size="13" font-weight="700" fill="#1a1a1a">15.0%</text>
+        <text x="180" y="220" text-anchor="middle" font-size="11" fill="#4a4a4a">16-24岁</text>
+
+        <!-- 25-29岁：约7% -->
+        <rect x="280" y="144" width="80" height="56" fill="#8b1a1a" opacity="0.7"/>
+        <text x="320" y="136" text-anchor="middle" font-size="13" font-weight="700" fill="#1a1a1a">7.0%</text>
+        <text x="320" y="220" text-anchor="middle" font-size="11" fill="#4a4a4a">25-29岁</text>
+
+        <!-- 30-59岁：约4% -->
+        <rect x="420" y="168" width="80" height="32" fill="#8b1a1a" opacity="0.5"/>
+        <text x="460" y="160" text-anchor="middle" font-size="13" font-weight="700" fill="#1a1a1a">4.0%</text>
+        <text x="460" y="220" text-anchor="middle" font-size="11" fill="#4a4a4a">30-59岁</text>
+
+        <!-- 全龄均值：5.2% -->
+        <rect x="560" y="158" width="80" height="42" fill="#8b1a1a" opacity="0.6"/>
+        <text x="600" y="150" text-anchor="middle" font-size="13" font-weight="700" fill="#1a1a1a">5.2%</text>
+        <text x="600" y="220" text-anchor="middle" font-size="11" fill="#4a4a4a">全龄均值</text>
+      </svg>
+    </div>
+    <div class="chart-caption">数据来源：国家统计局 | 注：青年失业率数据为示意测算，实际以统计局公报为准</div>
+
+    <hr class="section-rule">
+
+    <!-- ── 图表三：新增就业年度对比 ── -->
+    <div class="chart-title">城镇新增就业年度对比（2020-2025）</div>
+    <div class="chart-container">
+      <svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg">
+        <!-- 坐标轴 -->
+        <line x1="80" y1="200" x2="660" y2="200" stroke="#2a2a2a" stroke-width="1"/>
+        <line x1="80" y1="20" x2="80" y2="200" stroke="#2a2a2a" stroke-width="1"/>
+
+        <!-- 1200万目标线 -->
+        <line x1="80" y1="80" x2="660" y2="80" stroke="#8b1a1a" stroke-width="1" stroke-dasharray="4,2" opacity="0.5"/>
+        <text x="665" y="84" font-size="10" fill="#8b1a1a">1200万</text>
+
+        <!-- 网格线 -->
+        <line x1="80" y1="20" x2="660" y2="20" stroke="#d0c8be" stroke-width="0.5"/>
+        <line x1="80" y1="60" x2="660" y2="60" stroke="#d0c8be" stroke-width="0.5"/>
+        <line x1="80" y1="100" x2="660" y2="100" stroke="#d0c8be" stroke-width="0.5"/>
+        <line x1="80" y1="140" x2="660" y2="140" stroke="#d0c8be" stroke-width="0.5"/>
+        <line x1="80" y1="180" x2="660" y2="180" stroke="#d0c8be" stroke-width="0.5"/>
+
+        <!-- Y轴标签 -->
+        <text x="70" y="25" text-anchor="end" font-size="9" fill="#4a4a4a">1400万</text>
+        <text x="70" y="65" text-anchor="end" font-size="9" fill="#4a4a4a">1300万</text>
+        <text x="70" y="105" text-anchor="end" font-size="9" fill="#4a4a4a">1200万</text>
+        <text x="70" y="145" text-anchor="end" font-size="9" fill="#4a4a4a">1100万</text>
+        <text x="70" y="185" text-anchor="end" font-size="9" fill="#4a4a4a">1000万</text>
+
+        <!-- 柱状图（示意） -->
+        <!-- 2020: 1186万 -->
+        <rect x="120" y="97" width="70" height="103" fill="#8b1a1a" opacity="0.5"/>
+        <text x="155" y="89" text-anchor="middle" font-size="12" font-weight="700" fill="#1a1a1a">1186</text>
+        <text x="155" y="220" text-anchor="middle" font-size="11" fill="#4a4a4a">2020</text>
+
+        <!-- 2021: 1269万 -->
+        <rect x="220" y="55" width="70" height="145" fill="#8b1a1a" opacity="0.6"/>
+        <text x="255" y="47" text-anchor="middle" font-size="12" font-weight="700" fill="#1a1a1a">1269</text>
+        <text x="255" y="220" text-anchor="middle" font-size="11" fill="#4a4a4a">2021</text>
+
+        <!-- 2022: 1206万 -->
+        <rect x="320" y="85" width="70" height="115" fill="#8b1a1a" opacity="0.55"/>
+        <text x="355" y="77" text-anchor="middle" font-size="12" font-weight="700" fill="#1a1a1a">1206</text>
+        <text x="355" y="220" text-anchor="middle" font-size="11" fill="#4a4a4a">2022</text>
+
+        <!-- 2023: 1244万 -->
+        <rect x="420" y="67" width="70" height="133" fill="#8b1a1a" opacity="0.65"/>
+        <text x="455" y="59" text-anchor="middle" font-size="12" font-weight="700" fill="#1a1a1a">1244</text>
+        <text x="455" y="220" text-anchor="middle" font-size="11" fill="#4a4a4a">2023</text>
+
+        <!-- 2024: 1256万 -->
+        <rect x="520" y="61" width="70" height="139" fill="#8b1a1a" opacity="0.75"/>
+        <text x="555" y="53" text-anchor="middle" font-size="12" font-weight="700" fill="#1a1a1a">1256</text>
+        <text x="555" y="220" text-anchor="middle" font-size="11" fill="#4a4a4a">2024</text>
+
+        <!-- 2025: 1267万 -->
+        <rect x="620" y="56" width="70" height="144" fill="#8b1a1a" opacity="0.9"/>
+        <text x="655" y="48" text-anchor="middle" font-size="12" font-weight="700" fill="#1a1a1a">1267</text>
+        <text x="655" y="220" text-anchor="middle" font-size="11" fill="#4a4a4a">2025</text>
+
+        <!-- 图例 -->
+        <rect x="280" y="242" width="12" height="12" fill="#8b1a1a" opacity="0.7"/>
+        <text x="298" y="252" font-size="10" fill="#4a4a4a">城镇新增就业（万人）</text>
+        <line x1="440" y1="248" x2="460" y2="248" stroke="#8b1a1a" stroke-width="1" stroke-dasharray="4,2" opacity="0.5"/>
+        <text x="465" y="252" font-size="10" fill="#4a4a4a">年度目标线</text>
+      </svg>
+    </div>
+    <div class="chart-caption">数据来源：国家统计局 | 注：2020-2024年数据为示意测算，实际以统计局公报为准</div>
+
+    <hr class="section-rule">
+
+    <!-- ── 结构性议题卡片 ── -->
+    <h2 class="section-title">结构性议题：三重压力下的就业市场</h2>
+    <div class="topic-cards">
+      <div class="topic-card">
+        <div class="topic-card-num">I</div>
+        <div class="topic-card-label">青年就业压力</div>
+        <div class="topic-card-desc">2025届高校毕业生规模预计达1222万人，再创历史新高。16-24岁劳动力失业率在毕业季一度攀升至高位，青年就业压力持续。结构性矛盾突出：一方面高校毕业生求职难，另一方面制造业、服务业部分岗位招工难。</div>
+      </div>
+      <div class="topic-card">
+        <div class="topic-card-num">II</div>
+        <div class="topic-card-label">结构性招工难</div>
+        <div class="topic-card-desc">制造业技术工人、服务业护理人员等岗位持续面临"招工难"。劳动力供需的结构性错配，反映出教育体系与产业需求之间的脱节。技能提升与职业培训成为缓解结构性矛盾的关键。</div>
+      </div>
+      <div class="topic-card">
+        <div class="topic-card-num">III</div>
+        <div class="topic-card-label">慢就业现象</div>
+        <div class="topic-card-desc">高校毕业生中"慢就业""缓就业"现象增多，部分毕业生选择考研、考公、游学或在家等待。这一现象背后是就业观念的变化、对职业期望的提升，以及就业市场不确定性增加的综合反映。</div>
+      </div>
+    </div>
+
+    <hr class="section-rule">
+
+    <!-- ── 两栏深度分析 ── -->
+    <h2 class="section-title">深度分析：就业市场的韧性与隐忧</h2>
+    <div class="two-col">
+      <div>
+        <p style="margin-bottom: 12px;">
+          <strong>韧性来源：</strong>2025年就业市场的稳定，得益于服务业的持续恢复和新业态的快速发展。全年服务业增加值占GDP比重继续提升，吸纳就业能力增强。平台经济、共享经济、灵活就业等新形态为劳动力市场提供了缓冲。
+        </p>
+        <p style="margin-bottom: 12px;">
+          <strong>政策支撑：</strong>政府工作报告将城镇新增就业目标设定为1200万人以上，财政政策、货币政策与就业政策协同发力。稳岗返还、社保补贴、创业担保贷款等政策工具持续实施，为就业稳定提供了制度保障。
+        </p>
+        <p>
+          <strong>区域分化：</strong>东部沿海地区就业市场恢复较快，中西部地区部分城市面临产业转型带来的就业压力。城乡就业差距仍然存在， but 城镇化进程为农村劳动力转移提供了持续动力。
+        </p>
+      </div>
+      <div>
+        <p style="margin-bottom: 12px;">
+          <strong>隐忧一：</strong>青年失业率居高不下，不仅是周期性问题，更反映出教育体系与劳动力市场需求的结构性错配。高等教育扩招后，学历贬值与技能短缺并存，亟需教育供给侧改革。
+        </p>
+        <p style="margin-bottom: 12px;">
+          <strong>隐忧二：</strong>技术进步对就业的"替代效应"与"创造效应"并存。人工智能、自动化技术在提升生产率的同时，也在重塑岗位结构。如何平衡技术进步与就业稳定，是长期挑战。
+        </p>
+        <p>
+          <strong>隐忧三：</strong>人口老龄化加速，劳动年龄人口持续下降。长期来看，劳动力供给收缩将对就业市场产生深远影响。延迟退休、银发经济、终身学习等议题的重要性日益凸显。
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── 页脚 ── -->
+  <footer class="footer">
+    <div class="footer-title">数据来源与说明</div>
+    <p>
+      核心数据来源：国家统计局《2025年国民经济和社会发展统计公报》、人力资源和社会保障部年度统计数据。<br>
+      关键指标：城镇新增就业1267万人、城镇调查失业率均值5.2%、全国就业人员72504万人、城镇就业占比65.6%。<br>
+      图表说明：本报告中的图表数据为示意测算，实际月度数据、分年龄段失业率、历年新增就业数据以国家统计局正式公报为准。<br>
+      免责声明：本报告为内部参考，分析基于公开数据，不构成任何政策建议或投资建议。
+    </p>
+    <p style="margin-top: 10px; text-align: center; letter-spacing: 2px; font-size: 10px;">
+      CHINA EMPLOYMENT OBSERVER · 2025 ANNUAL REPORT · FOR INTERNAL REFERENCE ONLY
+    </p>
+  </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+name: 文献追踪周报自动生成
+
+on:
+  schedule:
+    # 每周一早上 10:00 (UTC+8) 自动执行
+    - cron: '0 2 * * 1'  # UTC 时间，UTC+8 是 10:00
+  workflow_dispatch:      # 支持手动触发
+
+jobs:
+  generate-report:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 检出代码
+      uses: actions/checkout@v4
+      
+    - name: 设置 Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        
+    - name: 安装依赖（如有）
+      run: |
+        python -m pip install --upgrade pip
+        # 如果 run_pipeline.py 需要额外依赖，在这里安装
+        # pip install -r requirements.txt
+        
+    - name: 运行文献追踪管线
+      run: |
+        python run_pipeline.py --force
+      env:
+        PYTHONIOENCODING: utf-8
+        
+    - name: 提交生成的报告
+      run: |
+        git config user.name "GitHub Actions Bot"
+        git config user.email "actions@github.com"
+        git add docs/
+        git add 文献追踪/
+        git commit -m "📊 自动生成文献追踪周报 $(date +%Y%m%d)" || echo "没有新内容需要提交"
+        git push
+        
+    - name: 部署到 GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs
+        keep_files: true
