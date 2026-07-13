@@ -10,7 +10,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-ROOT = Path(r"C:\Users\54778\Desktop\论文撰写全流程\文献追踪")
+ROOT = Path(__file__).parent  # 文献追踪/ 目录
 JOURNAL_NAMES = [
     "体育科学", "体育文化导刊", "北京体育大学学报", "成都体育学院学报",
     "广州体育学院学报", "武汉体育学院学报", "北京舞蹈学院学报",
