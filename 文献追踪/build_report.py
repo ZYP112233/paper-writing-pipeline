@@ -183,7 +183,7 @@ def build_html(data, stats, date_tag):
     journals = stats["by_journal"]
     names = list(journals.keys())
     counts = [journals[n] for n in names]
-    max_c = max(counts) if counts else 1
+    max_c = max(counts) if counts and max(counts) > 0 else 1
     bar_w, gap = 70, 22
     chart_w = len(names) * (bar_w + gap) + 40
     chart_h = 280

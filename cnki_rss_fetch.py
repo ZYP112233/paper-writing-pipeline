@@ -24,6 +24,7 @@ import re
 import time
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
+import ssl
 from urllib.request import urlopen, Request
 from urllib.error import URLError, HTTPError
 from html import unescape
@@ -70,10 +71,14 @@ def fetch_rss(url: str) -> str | None:
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
     }
+    # 跳过 SSL 验证（知网证书在某些环境不匹配）
+    ctx = ssl.create_default_context()
+    ctx.check_hostname = False
+    ctx.verify_mode = ssl.CERT_NONE
     for attempt in range(1, MAX_RETRIES + 1):
         try:
             req = Request(url, headers=headers)
-            with urlopen(req, timeout=REQUEST_TIMEOUT) as resp:
+            with urlopen(req, timeout=REQUEST_TIMEOUT, context=ctx) as resp:
                 data = resp.read()
                 for enc in ("utf-8", "gbk", "gb2312", "latin-1"):
                     try:
