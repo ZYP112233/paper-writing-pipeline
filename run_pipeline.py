@@ -30,7 +30,7 @@ PYTHON = sys.executable
 
 
 def collect_reports():
-    """扫描所有已生成的报告，返回 [{date, week, year, path, stats}]"""
+    """扫描所有已生成的报告，返回 [{date, week, year, path, stats, issue_number}]"""
     reports = []
     for f in sorted(SCRIPT_DIR.glob("文献追踪_*.html"), reverse=True):
         m = re.search(r"(\d{8})", f.stem)
@@ -66,6 +66,11 @@ def collect_reports():
             "ai": ai,
             "filename": f.name,
         })
+    
+    # 按期数从 1 开始编号（最早的报告是第 1 期）
+    for idx, r in enumerate(reports):
+        r["issue_number"] = len(reports) - idx
+    
     return reports
 
 
@@ -77,7 +82,7 @@ def build_index_html(reports):
         cards_html += f'''
     <a href="reports/{r["date"]}.html" class="report-card">
       <div class="card-date">{r["date_fmt"]}</div>
-      <div class="card-issue">{r["year"]} 第 {r["week"]} 期</div>
+      <div class="card-issue">第 {r["issue_number"]} 期</div>
       <div class="card-stats">
         <span><b>{r["total"]}</b> 篇文献</span>
         <span><b>{r["journals"]}</b> 本期刊</span>

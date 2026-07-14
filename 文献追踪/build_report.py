@@ -231,8 +231,9 @@ def build_html(data, stats, date_tag):
             lis += f'<li class="more">…另有 {more} 篇</li>'
         browse_html += f'<div class="jour-col"><h3>{j}</h3><ul>{lis}</ul></div>'
 
-    # 期号（今年第几周）
-    week = datetime.strptime(date_tag, "%Y%m%d").isocalendar()[1]
+    # 期号（从第 1 期开始累计）
+    existing_reports = sorted(ROOT.glob("文献追踪_*.html"))
+    issue_number = len(existing_reports) + 1  # 当前是第几期
     year = date_tag[:4]
 
     return f'''<!DOCTYPE html>
@@ -240,7 +241,7 @@ def build_html(data, stats, date_tag):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>学术前沿观察 · {year} 第 {week} 期</title>
+<title>学术前沿观察 · 第 {issue_number} 期</title>
 <style>
   :root {{ --bg:#f5f1eb; --paper:#faf7f2; --ink:#1a1a1a; --ink2:#4a4a4a;
            --accent:#8b1a1a; --rule:#2a2a2a; --rule-light:#d0c8be; }}
@@ -336,14 +337,14 @@ def build_html(data, stats, date_tag):
 
   <nav class="nav-bar">
     <a href="../index.html">← 返回主页</a>
-    <span class="nav-title">学术前沿观察 · {year} 第 {week} 期</span>
+    <span class="nav-title">学术前沿观察 · 第 {issue_number} 期</span>
     <a href="../index.html">全部期刊</a>
   </nav>
 
   <header class="masthead">
     <div class="masthead-brand">ACADEMIC FRONTIER OBSERVER</div>
     <div class="masthead-title">学术前沿观察</div>
-    <div class="masthead-sub">{year} 年第 {week} 期 · 体育科学与舞蹈艺术核心期刊文献追踪</div>
+    <div class="masthead-sub">第 {issue_number} 期 · 体育科学与舞蹈艺术核心期刊文献追踪</div>
   </header>
 
   <div class="standfirst">
