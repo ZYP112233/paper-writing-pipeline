@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>学术前沿观察 · 第 2 期</title>
+<style>
+  :root { --bg:#f5f1eb; --paper:#faf7f2; --ink:#1a1a1a; --ink2:#4a4a4a;
+           --accent:#8b1a1a; --rule:#2a2a2a; --rule-light:#d0c8be; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--ink);
+    font-family:"Noto Serif SC","Source Han Serif CN","STSong","SimSun",Georgia,serif;
+    line-height:1.75; -webkit-font-smoothing:antialiased; }
+  .page { max-width:960px; margin:0 auto; background:var(--paper); min-height:100vh; }
+
+  /* 导航栏 */
+  .nav-bar { display:flex; justify-content:space-between; align-items:center;
+    padding:10px 30px; background:var(--rule); color:#fff; }
+  .nav-bar a { color:#fff; text-decoration:none; font-size:13px; letter-spacing:1px;
+    padding:6px 16px; border:1px solid rgba(255,255,255,0.3); transition:all .2s; }
+  .nav-bar a:hover { background:rgba(255,255,255,0.15); border-color:rgba(255,255,255,0.6); }
+  .nav-bar .nav-title { font-size:12px; letter-spacing:3px; opacity:0.7; }
+
+  /* 报头 */
+  .masthead { text-align:center; padding:36px 40px 18px; border-bottom:4px double var(--rule); }
+  .masthead-brand { font-size:11px; letter-spacing:6px; color:var(--ink2); }
+  .masthead-title { font-size:42px; font-weight:900; letter-spacing:3px; margin:8px 0 4px; }
+  .masthead-sub { font-size:13px; color:var(--ink2); letter-spacing:2px; }
+
+  /* 导语 */
+  .standfirst { max-width:820px; margin:24px auto; padding:0 30px 20px; font-size:17px; line-height:1.85;
+    color:#444; text-align:center; font-style:italic; border-bottom:1px solid var(--rule-light); }
+  .standfirst b { color:var(--accent); font-style:normal; }
+
+  /* 指标条 */
+  .metrics { display:grid; grid-template-columns:repeat(4,1fr); gap:14px;
+    max-width:860px; margin:24px auto; padding:0 30px; }
+  .metric { background:#fff; padding:18px 10px; border:1px solid var(--rule-light); text-align:center; }
+  .metric .num { font-size:34px; color:var(--accent); font-family:Georgia; font-weight:bold; }
+  .metric .lbl { font-size:12px; color:var(--ink2); margin-top:4px; letter-spacing:1px; }
+
+  /* 正文区 */
+  .wrap { max-width:920px; margin:0 auto; padding:30px 30px; }
+  .two-col { column-count:2; column-gap:32px; column-rule:1px solid var(--rule-light); text-align:justify; }
+  .two-col p { margin:0 0 14px; font-size:15px; }
+  .two-col p:first-of-type::first-letter {
+    font-size:54px; float:left; line-height:1; padding:4px 8px 0 0;
+    color:var(--accent); font-family:Georgia; font-weight:bold; }
+
+  /* 图表 */
+  .charts { display:grid; grid-template-columns:1.4fr 1fr; gap:24px; margin:28px 0; }
+  .chart-box { background:#fff; padding:18px; border:1px solid var(--rule-light); }
+  .chart-box h3 { font-size:15px; color:var(--accent); border-bottom:1px solid var(--rule-light);
+    padding-bottom:6px; margin-bottom:10px; }
+
+  /* 重点关注 */
+  .focus { margin:30px 0; }
+  .focus > h2 { font-size:22px; color:var(--accent); border-left:5px solid var(--accent);
+    padding-left:12px; margin-bottom:14px; }
+  .focus-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  .focus-card { background:#fff; padding:18px 16px; border:1px solid var(--rule-light); position:relative; }
+  .focus-num { position:absolute; top:-12px; left:14px; background:var(--accent); color:#fff;
+    padding:2px 10px; font-family:Georgia; font-weight:bold; font-size:13px; }
+  .focus-title { font-weight:bold; margin:8px 0 8px; line-height:1.45; font-size:15px; }
+  .focus-title a { color:var(--ink); text-decoration:none; border-bottom:1px dotted var(--accent); }
+  .focus-title a:hover { color:var(--accent); }
+  .focus-meta { font-size:12px; color:var(--ink2); }
+
+  /* 议题卡片 */
+  .topics { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:28px 0; }
+  .topic-card { background:#fff; border:1px solid var(--rule-light); padding:16px; }
+  .topic-card h4 { color:var(--accent); font-size:15px; margin-bottom:6px; }
+  .topic-card p { font-size:13px; line-height:1.7; color:#444; }
+
+  /* 分刊速览 */
+  .browse { margin:30px 0; display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  .jour-col { background:#fff; padding:16px; border:1px solid var(--rule-light); }
+  .jour-col h3 { color:var(--accent); font-size:15px; border-bottom:1px solid var(--rule-light);
+    padding-bottom:6px; margin-bottom:10px; }
+  .jour-col ul { margin:0; padding-left:16px; font-size:12.5px; line-height:1.7; }
+  .jour-col li { margin-bottom:6px; }
+  .jour-col a { color:var(--ink); text-decoration:none; border-bottom:1px dotted var(--accent); }
+  .jour-col a:hover { color:var(--accent); }
+  .jour-col .meta { color:var(--ink2); font-size:11px; }
+  .jour-col .more { color:var(--ink2); font-style:italic; list-style:none; }
+
+  footer { text-align:center; padding:30px 20px; font-size:12px; color:var(--ink2);
+    border-top:1px solid var(--rule-light); margin-top:30px; }
+
+  @media (max-width:760px) {
+    .metrics,.charts,.focus-cards,.topics,.browse { grid-template-columns:1fr; }
+    .two-col { column-count:1; }
+    .masthead-title { font-size:28px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <nav class="nav-bar">
+    <a href="../index.html">← 返回主页</a>
+    <span class="nav-title">学术前沿观察 · 第 2 期</span>
+    <a href="../index.html">全部期刊</a>
+  </nav>
+
+  <header class="masthead">
+    <div class="masthead-brand">ACADEMIC FRONTIER OBSERVER</div>
+    <div class="masthead-title">学术前沿观察</div>
+    <div class="masthead-sub">第 2 期 · 体育科学与舞蹈艺术核心期刊文献追踪</div>
+  </header>
+
+  <div class="standfirst">
+    本期覆盖 <b>8</b> 本核心期刊，共收录文献 <b>120</b> 篇。
+    舞蹈 / 国标舞方向 <b>12</b> 篇，人工智能相关 <b>16</b> 篇。
+    总量平稳，结构分化——训练科学化、学科自主性、AI 介入编舞成为三条并行主线。
+    <br><span style="font-size:13px;color:#888;font-style:normal;">生成时间：2026-07-14 13:14</span>
+  </div>
+
+  <div class="metrics">
+    <div class="metric"><div class="num">120</div><div class="lbl">文献总数 / 篇</div></div>
+    <div class="metric"><div class="num">8</div><div class="lbl">核心期刊</div></div>
+    <div class="metric"><div class="num">12</div><div class="lbl">舞蹈 / 国标舞</div></div>
+    <div class="metric"><div class="num">16</div><div class="lbl">AI 主题</div></div>
+  </div>
+
+  <div class="wrap">
+
+    <section class="two-col">
+      <p>体育科学依旧是产出最稳定的阵地——《体育科学》《体育文化导刊》《北京体育大学学报》《成都体育学院学报》等合计贡献了绝大部分文献。「青少年体质」「运动训练量化」「体育产业数字化」「备战洛杉矶奥运」几个关键词出现频次显著上升，反映出后疫情时代体育学科研究议程的再定位。</p>
+      <p>《北京舞蹈学院学报》以 15 篇文献成为本期最值得关注的单刊——国标舞剧的本体突破、具身认知视角下的编舞重构、生成式 AI 介入舞蹈创作、"舞蹈中国性"的理论建构等议题集中爆发，标志着舞蹈学科正从「技艺传承」走向「理论自觉」的新阶段。</p>
+    </section>
+
+    <section class="charts">
+      <div class="chart-box">
+        <h3>各期刊文献分布</h3>
+        <svg viewBox="0 0 776 280" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="40" width="70" height="190" fill="#8b1a1a"/><text x="55.0" y="34" text-anchor="middle" font-size="13" fill="#2b2b2b" font-family="Georgia">15</text><text x="55.0" y="252" text-anchor="middle" font-size="11" fill="#444" font-family="Georgia">体育科学</text><rect x="112" y="40" width="70" height="190" fill="#8b1a1a"/><text x="147.0" y="34" text-anchor="middle" font-size="13" fill="#2b2b2b" font-family="Georgia">15</text><text x="147.0" y="252" text-anchor="middle" font-size="11" fill="#444" font-family="Georgia">体育文化导…</text><rect x="204" y="40" width="70" height="190" fill="#8b1a1a"/><text x="239.0" y="34" text-anchor="middle" font-size="13" fill="#2b2b2b" font-family="Georgia">15</text><text x="239.0" y="252" text-anchor="middle" font-size="11" fill="#444" font-family="Georgia">北京体育大…</text><rect x="296" y="40" width="70" height="190" fill="#8b1a1a"/><text x="331.0" y="34" text-anchor="middle" font-size="13" fill="#2b2b2b" font-family="Georgia">15</text><text x="331.0" y="252" text-anchor="middle" font-size="11" fill="#444" font-family="Georgia">成都体育学…</text><rect x="388" y="40" width="70" height="190" fill="#8b1a1a"/><text x="423.0" y="34" text-anchor="middle" font-size="13" fill="#2b2b2b" font-family="Georgia">15</text><text x="423.0" y="252" text-anchor="middle" font-size="11" fill="#444" font-family="Georgia">广州体育学…</text><rect x="480" y="40" width="70" height="190" fill="#8b1a1a"/><text x="515.0" y="34" text-anchor="middle" font-size="13" fill="#2b2b2b" font-family="Georgia">15</text><text x="515.0" y="252" text-anchor="middle" font-size="11" fill="#444" font-family="Georgia">武汉体育学…</text><rect x="572" y="40" width="70" height="190" fill="#8b1a1a"/><text x="607.0" y="34" text-anchor="middle" font-size="13" fill="#2b2b2b" font-family="Georgia">15</text><text x="607.0" y="252" text-anchor="middle" font-size="11" fill="#444" font-family="Georgia">北京舞蹈学…</text><rect x="664" y="40" width="70" height="190" fill="#8b1a1a"/><text x="699.0" y="34" text-anchor="middle" font-size="13" fill="#2b2b2b" font-family="Georgia">15</text><text x="699.0" y="252" text-anchor="middle" font-size="11" fill="#444" font-family="Georgia">上海体育大…</text>
+        </svg>
+      </div>
+      <div class="chart-box">
+        <h3>文献主题分布</h3>
+        <table style="width:100%;font-size:13px;border-collapse:collapse;">
+          <tr><td style="padding:7px;border-bottom:1px solid #eee;">训练/竞技</td><td style="text-align:right;padding:7px;border-bottom:1px solid #eee;color:#8b1a1a;font-weight:bold;">25</td><td style="padding:7px;border-bottom:1px solid #eee;color:#888;">篇</td></tr><tr><td style="padding:7px;border-bottom:1px solid #eee;">教育/学校</td><td style="text-align:right;padding:7px;border-bottom:1px solid #eee;color:#8b1a1a;font-weight:bold;">15</td><td style="padding:7px;border-bottom:1px solid #eee;color:#888;">篇</td></tr><tr><td style="padding:7px;border-bottom:1px solid #eee;">舞蹈/艺术</td><td style="text-align:right;padding:7px;border-bottom:1px solid #eee;color:#8b1a1a;font-weight:bold;">6</td><td style="padding:7px;border-bottom:1px solid #eee;color:#888;">篇</td></tr><tr><td style="padding:7px;border-bottom:1px solid #eee;">体育产业</td><td style="text-align:right;padding:7px;border-bottom:1px solid #eee;color:#8b1a1a;font-weight:bold;">17</td><td style="padding:7px;border-bottom:1px solid #eee;color:#888;">篇</td></tr><tr><td style="padding:7px;border-bottom:1px solid #eee;">历史文化</td><td style="text-align:right;padding:7px;border-bottom:1px solid #eee;color:#8b1a1a;font-weight:bold;">18</td><td style="padding:7px;border-bottom:1px solid #eee;color:#888;">篇</td></tr><tr><td style="padding:7px;border-bottom:1px solid #eee;">其他</td><td style="text-align:right;padding:7px;border-bottom:1px solid #eee;color:#8b1a1a;font-weight:bold;">39</td><td style="padding:7px;border-bottom:1px solid #eee;color:#888;">篇</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <section class="focus">
+      <h2>重点关注 · 舞蹈 / 国标舞</h2>
+      <div class="focus-cards">
+        
+<div class="focus-card">
+  <div class="focus-num">01</div>
+  <div class="focus-title"><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A2Rnla3iJYq3Z2ALr8oA9EZXHFlFVVcOP0hn2o7V1QUvExHq-u0TiE0MqPw9LrXAzxUHvD2ODI_Wb_dJLYJHyAI6xALzAoQR6vfr4B8HWOeYYW9yJ-0yNgcXnGJco39kOU4x5WDoPLjbYSKxxk4afiYYbjDwmHWgUMq23YGx10bsA==&uniplatform=NZKPT&language=CHS" target="_blank">“两创”视角下中国高校舞蹈创作的特质、转变与取向(2014—2024)</a></div>
+  <div class="focus-meta">刘奕杉;刘炼 / 北京舞蹈学院学报 · 2026-05-27</div>
+</div>
+<div class="focus-card">
+  <div class="focus-num">02</div>
+  <div class="focus-title"><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A3kFEKTR7t_OBpjH7P9J9ltI0PbXXAimUhbxplojFnbjxYbMDLAKFRBnJqeTBVVSTmh3cJOat5fdRMlQ6z2wFncaGcbzpwAawgWjJR_js_bxe3ocLDItu63OURXNkVmUWpZwi4IibBZrHLm2vWLejs9NDmu_Y6A0vrkM_rPWS-HHg==&uniplatform=NZKPT&language=CHS" target="_blank">中国现代舞“概念性”的意象书写与空间实践——以第十四届中国舞蹈“荷花奖”现代舞参评作品为例</a></div>
+  <div class="focus-meta">何华铭 / 北京舞蹈学院学报 · 2026-05-26</div>
+</div>
+<div class="focus-card">
+  <div class="focus-num">03</div>
+  <div class="focus-title"><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A2iOMf8nc5IudAwGEtVBEEAqKmsTsyrXj2z6E75ZbGIMCVS-aJkEYFLMiAMOgp60jEffq5J98s33qHT2LGhiGrpzBebvHrsZuDar1vZpEav4_uBlC_ic1QRyOBQugPpz5kAGOtivNLAATEppxF7Y27OWBqd2jxjF3602QkB1CCnTA==&uniplatform=NZKPT&language=CHS" target="_blank">具身重构与创造力本质——基于生成式人工智能编舞的路径分析与美学讨论</a></div>
+  <div class="focus-meta">孟成真;徐颃 / 北京舞蹈学院学报 · 2026-02-27</div>
+</div>
+      </div>
+    </section>
+
+    <section class="topics">
+      <div class="topic-card"><h4>AI 介入编舞</h4><p>生成式 AI 正从「工具辅助」走向「共创主体」，编舞的著作权、身体性、审美边界将被重新定义。</p></div>
+      <div class="topic-card"><h4>学科自主性</h4><p>舞蹈学、体育学、艺术学三大学科对「归属」与「话语」的争夺加剧，理论建构成为新的竞争高地。</p></div>
+      <div class="topic-card"><h4>国标舞剧化</h4><p>从《人间四月天》到《长恨歌》，国标舞正突破「竞技-表演」二元结构，向「舞剧」形态演进。</p></div>
+    </section>
+
+    <section class="browse">
+      <div class="jour-col"><h3>体育科学</h3><ul><li><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A06NuhBc4Pe07h2k9qHSdW1coszxomhlP5bnvM3weSAkYKmP4rqfKCM_DeJgNDG3E-tUYrnNW8rDssSy55FHKjqIKQZEl8PKKEaUCQMJZAxBQFusl0fuNxcnNiWQsX7HDYgDSX5wIV33lTVeQqHM1g1geUhx7a1dbTKTqS7sH4V0A==&uniplatform=NZKPT&language=CHS" target="_blank">群众性体育赛事何以实现价值共创——基于“浙BA”的案例研究</a><span class="meta"> — 郑芳;李泠昱;刘钰;陈鸯鸯</span></li><li><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A3qesQCOdpXCHe8phz_1XuUSUEhDdWTwzNpHdXU4yGuFQjmsqHDO8-sK_8KtlZQ0G_fzbujhzoj2An4cRoqwbAZaisC7Xt-39dezcmOCJSwWfrEryYSEDgvyToTbwHpb0jkTelTMYA1TqtioSY0pwa0AkhX4UAB6FkaUMjQHYN7lQ==&uniplatform=NZKPT&language=CHS" target="_blank">基于可信数据空间的体育数据要素流通利用路径</a><span class="meta"> — 张涛</span></li><li><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A2tfI0OYyTuVurd1O6r8Shberm1XDYaqylOkJRk4Dol1-Ce_6h0yxLQi_AJoELMu8e7RxzfkDD9kczXbOwbhwybincKuQDIloeDGz2rr2hCbLtir2Ii_dVY4ZPMEPg7V6Af1-nvNb6pe1g9354XeSgSFxhV-2pFv-1DipUhKM-7rA==&uniplatform=NZKPT&language=CHS" target="_blank">急性运动如何帮助人们忘记负性信息？——来自fNIRS的证据</a><span class="meta"> — 孙潇;刘志国;张艳琼;宋耀武</span></li><li><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A0o7cRE7ZfO2GIi28OtbgqwRTCmlmGP1YJm6WnrQGlutNeA9Bj97iRQpPSs0Nw42BETlzDk9c5hwcHJBg4t8r0qztLxrkKqaxmsUnRvvaFxemAM6MXeo-Dd8y3uqF4zNNiYBt32gIa65_ubBUUzqzqD5QwLwpfkvvisGUq6x193tw==&uniplatform=NZKPT&language=CHS" target="_blank">具身的媒介：“体育即传播”的理论谱系及新建构</a><span class="meta"> — 董嘉颖;李爱群</span></li><li class="more">…另有 11 篇</li></ul></div><div class="jour-col"><h3>体育文化导刊</h3><ul><li><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A2XAO73PdUy7bWzwLaOsJMox6DSHjH8TA85Iuvqd8uakjSRw56qnBxbAK6euisZQzkOxNE0iDAf8qkIlMWl3ndEJAmoz7s-BPgsanof0kzhClpx5AXhEcIxEwL_aBJnJRv91YuhczKVU74a24WnhWLLtC6VqxtOhWSj9xQuL9Mkbw==&uniplatform=NZKPT&language=CHS" target="_blank">投稿须知</a><span class="meta"></span></li><li><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A1lBI-VEAwINHYp3OdfqU6YwSbyCZHD9JdzSCZ4k4hCvvnTWu_U1B0mpIJLQ2H1YV4Yb88mdnOjD-FkkWqwIEPeYpp9cVQXCHMwV3ZPhGxdZIDhrlmbOuGF0zEL5F4teBA4eO1ZufUaUCt0ctTCj3mxbdNfyCdCt9PwMN4Rj8vjvw==&uniplatform=NZKPT&language=CHS" target="_blank">新发展理念引领城市足球联赛发展的逻辑机理与推进策略</a><span class="meta"> — 万斌;赵晶</span></li><li><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A02UcAItHZv93Z5BDM9cP7Ogge3XI_T2Lb_E9O6V8F12NlSW7oAzDlhCtAW7hUmkmUO_IJ9iXLwugNYWBM9luIE4-maR8ckMDJOlt0EqjxDKLDlhCHfmM7_4ZyWYJyiOm6S_AbnSGkSRrMgssofYaGmZzlqvBEAVRXw9DPrUwOosw==&uniplatform=NZKPT&language=CHS" target="_blank">大型体育赛事场域空间融合的经验与启示——以2024年巴黎奥运会为例</a><span class="meta"> — 刘君;于紫宸;肖彦;王晓玲;韩昊鹏</span></li><li><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A2lamCBzwcHAmYRR-zj6tj3Mf2TuNkCCayw0ucXVf9m8kywIvrWMrA-dALN0G6JRVd1vn6V82A_ZQA9OX62t4odmyVSWP1NdloLnZDJwSu-wztiRDjK1TAU7aynCRO2-w7LkpTDa3-ZcRqK1H3bNuMMX8IxG5WaxUIAmZrZo-1PrA==&uniplatform=NZKPT&language=CHS" target="_blank">数智赋能体育非物质文化遗产传播的样态、挑战与路径</a><span class="meta"> — 陈琦;戎杰;司红深;李春光</span></li><li class="more">…另有 11 篇</li></ul></div><div class="jour-col"><h3>北京体育大学学报</h3><ul><li><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A1I_KNecyfVGGkWq4esiiUoVoZpWwn8ksL3h1EEFZln1Pm2EvMFxtHPV1UQ2B_Wc6fEOUeLQHcEoQYayi6B-NfCj1L7U442Ajcu4WV1a0MxDjeODutX1adc8kdMZjWKqUIY1cMJJZorQgTjdYgs5TNhfIvj-PObTq7muPVxCgflGw==&uniplatform=NZKPT&language=CHS" target="_blank">我国备战2028年洛杉矶奥运会面临的形势研判、现实挑战及推进方略</a><span class="meta"> — 蔡娟;乔尚奎;王芳;李欢;高洁</span></li><li><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A2dWV6L-55Nma6zl3lsClG0unjKzdcCuu8ZETGC2K4sjqWS0YcpE7reaLPRB8puf26UyuoV8ZcYBgSwbRKC-2N5UgsoYAcbHpyDP8-oExH_M2wHUwqVvmLIgsEduq5muAoQ9nBNJ2iIzjwJi2rUl-9aL5s6gENtPd1V8Hs1-ziztA==&uniplatform=NZKPT&language=CHS" target="_blank">我国奥运军团夏季奥运会境外参赛的竞技表现、制胜优势与现实启示</a><span class="meta"> — 林郁箐;郭月德;杨国庆</span></li><li><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A0sJtaXb14kre_jlrP98XhELe7_LullXblY1Dgl5Pza9bC-7KY6b88NCn7GZpjeRkrbl0h3C1LSqr9HYyfSMtq5846tQasFg52YnW4Ab2EUGB-JUmcKjv9qzKHzER9QO_BplqxKlS6nOErRZ78hNEfH6WatPNrAnPC6cYRcgwNrPg==&uniplatform=NZKPT&language=CHS" target="_blank">巴黎奥运会我国获奖特点及对洛杉矶奥运会备战的镜鉴</a><span class="meta"> — 焦芳钱;翁兴和;马丽亚;熊柏臻</span></li><li><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A0sJtaXb14kre_jlrP98XhELe7_LullXblY1Dgl5Pza9bC-7KY6b88N6tUAsMTBKKoHN-JFoJOrgB0hD5khS3wp0NSGQlmcLdTztEqqDpoHWdfCyqWiGCiY2hFcfcqbyhL_bYMTVUEEOhvfnR_FiZnIYGaiiWndPUvPEW1Jt6o-Gg==&uniplatform=NZKPT&language=CHS" target="_blank">鹰眼之下的公平与博弈：2025年多哈世乒赛的制度实践观察</a><span class="meta"> — 吴飞</span></li><li class="more">…另有 11 篇</li></ul></div><div class="jour-col"><h3>成都体育学院学报</h3><ul><li><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A2v0vFg38yYURws_t2vW7NDaPzAuXbMUsDxA8K82nEcnskTeMYCLZhup7WFI_Qt2cv0tzePF93FbvtBeJG8sf-LDZiwygBEvXh1rEDMnqgsyKYCzNYbYzxOj0dZMxLfBZfxxPsLXpaecZ-WAg_krQDvd7qEsNXu6Bc5uo0X7OHbgQ==&uniplatform=NZKPT&language=CHS" target="_blank">体育赛事促进“商旅文体”融合发展：域外经验与中国镜鉴</a><span class="meta"> — 王思贝;郑家鲲;陈丛刊</span></li><li><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A0WPOLybOdMZ54c6Xwk8fakmHJJPfsTlNQWJhELam4ppXpdayBNHO4DcjBYO-WtqHurZOiTzENZCub9h3zCKTHE2j-JOoZnBSutI_iYsVpbOwDbBDlnc3GeTaDqvFwH0ens4k8AwaWW8XM74YkLnTG5e_OYYQBXQgEtKyeRR0n5Jw==&uniplatform=NZKPT&language=CHS" target="_blank">老年群体非正式体育组织的成长困境与治理路径</a><span class="meta"> — 杜长亮;徐诺渲</span></li><li><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A0aepw231NBXjEOVhbue5dLDA7tiAEaOmc4l3fZkB_LhBSp5KUbQCFwVKjbx0mylHqg3_hja4DLzvvY0jRiAYLFQfbd3AnBwrvEzihPxSgEjNUF8vga3qTjYiH0Gqp0XPJi5LjTmAba-EVkxBvaaEqFDz1pUy6tGArWPpmIEaj4CQ==&uniplatform=NZKPT&language=CHS" target="_blank">生态文明建设引领健康生态体育旅游高质量发展的新趋势及策略研究</a><span class="meta"> — 王永安;李燕;冯云;陈珍怀;张鹏;何欣键</span></li><li><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A11qyQw84tybyQAqyfGB1somgkZUYKHZHbz08jbcX6ZR-Gf8sh7wFE5XXHIR6j9S80q_EvUnykLitl2qe_WslCZ-H2pXtFvf4gKr4del4n-S87Ay7dFI1a55Rrxu3MAiJ4y8YC4KnISQ9A7QAe275F-CrjddsNo0Sv0MbO_AJc5kg==&uniplatform=NZKPT&language=CHS" target="_blank">体育赋能“一老一小”跨代际互动的技术适配与治理创新</a><span class="meta"> — 卢诗卉;肖羽;董传升</span></li><li class="more">…另有 11 篇</li></ul></div><div class="jour-col"><h3>广州体育学院学报</h3><ul><li><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A0nhpmOLM88-nyh7TddCSPV2hUcJ93Cj0bOeIMlyICtBQ21N8rHElCr4xtbkaPQrlmbj8czFVb8qZiEbcTNfRo_8fRCe0BnjqZff749OMQuGtoXpD9r8xhrY0KOkZPPBs2nbBweK3IY0fLoOicF6c2mhKEeT4gmAIpf4grPjsZ2OA==&uniplatform=NZKPT&language=CHS" target="_blank">“十五五”时期山东省校园足球高质量发展路径探析</a><span class="meta"> — 张志勇;孟晓平;马玉华</span></li><li><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A0ztHmgHH-VZruzhhaVZVWCSUs0NSyKE-xlk9R9g4G0ICx63rfPOSC9JNxPES-Y4kqZ200j01BUbX7NXNhudjXjADkgNFpiZovRmbMBcBlNJRJiQVFehnUvidbvVVL5YDEH2o4EGpshtuUzzSAOaAdasP0y9W7vp31BA9QaIZxlJQ==&uniplatform=NZKPT&language=CHS" target="_blank">技术接受度和心理因素对大学生“网络体育产品”购买意愿的影响：利用多群组分析的性别差异</a><span class="meta"> — 喻袁崛;喻坚</span></li><li><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A3O_upGRWOq2jWGfXJCwiKjFusN2BsMunUdsLvfvdto9T0PnxP8IIcN-1LHljUlses-oR7E54owDQLjwvMfUxTh-9BaHyNqV7SgQSn1dg718glZilPFnZiogmbUqtis62N62Lr9ewfS2A7dWhgBJHswULAh77Q9WygICpSlY_woMg==&uniplatform=NZKPT&language=CHS" target="_blank">数字赋能老年人体育服务高质量发展研究</a><span class="meta"> — 杨宗友;刘峥</span></li><li><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A32JKsFnsvSJOH5BS8zjxiEdSM-i4MghNXeQeORa7TsjV0jW_uHyivPl-x1bIn93RIvP6zBDQYs-FfdD0K5zXZcrmqUSed2PKQ5xIaLUoEAhl2uT-LrO6jTxA25v--75y87k_5oprECeSRVaTSEEyX8a6_-9bB-X8hD1qvL4qnyZg==&uniplatform=NZKPT&language=CHS" target="_blank">国际竞技体操竞争格局及2028洛杉矶奥运周期中国备战策略——基于新规则变革的系统性分析</a><span class="meta"> — 刘婷;杨通烈;吕万刚</span></li><li class="more">…另有 11 篇</li></ul></div><div class="jour-col"><h3>武汉体育学院学报</h3><ul><li><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A19jbOsGkHDUdDV7Yjze18oYDNrREwat5fi5lHE39pRwczmMm2GqjQMBx7krc78WRjtrAWRzE9Z9vEA96nee_nnH72GptR9zE2p0PhzsHGQDIiO82yyUUO2AyihR83x9i9l_XCTpEk85w_AZxzjWT5OyULq6fJIg3rsdZlfpCSEsA==&uniplatform=NZKPT&language=CHS" target="_blank">会通思辨与实证：新时代中国特色体育学自主知识体系建构中的理论概括与提炼</a><span class="meta"> — 张瑞林;李凌</span></li><li><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A2P7E9l2TJo5XLeui6nepFSXlSVxz5syWjZc1YdiGumC1YItxVHwV_qElvua1MLeghdWxj_zvzcysOW7dMOpm521la3lsipfR5CF3vKNRfbtNofF1lY42WFJ8JeJSctok1p4Kh2OeU5mOSTzJD0tEGbvF536gP5eNe_z9VbpGQwcA==&uniplatform=NZKPT&language=CHS" target="_blank">如何“用好”公共体育场馆?——推进服务效能提升的关键路径研究</a><span class="meta"> — 陈元欣;周彪;王星玥;罗思颖;叶程万</span></li><li><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A3a6tWbLy8XH6fZW34CuiheSHI4o4cFK8bA3KWB5T12EMb2zN_1dHeBx6v8YnyOaPRQzrX-f5JNHzfbO2csUL1DD6PqLVs0v_e0SZ6Bay4eijMdW2ZuM4PxZ53RQ8BoY7W3Oo3sNph5Y_A0PbXwEr706sgy3_XyO7HLIzHRTgpZ9Q==&uniplatform=NZKPT&language=CHS" target="_blank">迈向敏捷治理：城市社区公共体育服务治理创新研究</a><span class="meta"> — 张殿祥;胡庆山;朱浩天;贺凤凯</span></li><li><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A0wz-vlLt4lYEV1Ly6HXhB7_o3OxKmJj3F0bCW_cZaKFwC_d0mN4gUxJX_D8ZjwcUEiPOY0HU_QK8MOgy2lPaKile5vRABG-wz7DH7JJPFJeQppQ29X8lM3_vT8g80NJoUpieSPqA5kxkKnma1QSUwOT3a3R218ZCCj64gSKvx6fw==&uniplatform=NZKPT&language=CHS" target="_blank">我国乡土社会中现代体育的非对称在地化——基于闽南野球的事件社会学考察</a><span class="meta"> — 曹胡丹;杨海晨</span></li><li class="more">…另有 11 篇</li></ul></div><div class="jour-col"><h3>北京舞蹈学院学报</h3><ul><li><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A2Rnla3iJYq3Z2ALr8oA9EZXHFlFVVcOP0hn2o7V1QUvExHq-u0TiE0MqPw9LrXAzxUHvD2ODI_Wb_dJLYJHyAI6xALzAoQR6vfr4B8HWOeYYW9yJ-0yNgcXnGJco39kOU4x5WDoPLjbYSKxxk4afiYYbjDwmHWgUMq23YGx10bsA==&uniplatform=NZKPT&language=CHS" target="_blank">“两创”视角下中国高校舞蹈创作的特质、转变与取向(2014—2024)</a><span class="meta"> — 刘奕杉;刘炼</span></li><li><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A3kFEKTR7t_OBpjH7P9J9ltI0PbXXAimUhbxplojFnbjxYbMDLAKFRBnJqeTBVVSTmh3cJOat5fdRMlQ6z2wFncaGcbzpwAawgWjJR_js_bxe3ocLDItu63OURXNkVmUWpZwi4IibBZrHLm2vWLejs9NDmu_Y6A0vrkM_rPWS-HHg==&uniplatform=NZKPT&language=CHS" target="_blank">中国现代舞“概念性”的意象书写与空间实践——以第十四届中国舞蹈“荷花奖”现代舞参评作品为例</a><span class="meta"> — 何华铭</span></li><li><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A3kFEKTR7t_OBpjH7P9J9lt1qvnNh_mQoxRhfiM5_ZPUj76h4s3ePiIjwlpZguvjYpv-yk2XNk6dKLur-4BbYgsTBGJgyBX23Z3JGMVlwKaRs4E5qt9N10VFDD-r6rxNziAY8m5DnWVWJIrdNEYbO_N1e3MqXVRKuVHUrddTmpfBA==&uniplatform=NZKPT&language=CHS" target="_blank">剧照</a><span class="meta"></span></li><li><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A2iOMf8nc5IudAwGEtVBEEAqKmsTsyrXj2z6E75ZbGIMCVS-aJkEYFLMiAMOgp60jEffq5J98s33qHT2LGhiGrpzBebvHrsZuDar1vZpEav4_uBlC_ic1QRyOBQugPpz5kAGOtivNLAATEppxF7Y27OWBqd2jxjF3602QkB1CCnTA==&uniplatform=NZKPT&language=CHS" target="_blank">具身重构与创造力本质——基于生成式人工智能编舞的路径分析与美学讨论</a><span class="meta"> — 孟成真;徐颃</span></li><li class="more">…另有 11 篇</li></ul></div><div class="jour-col"><h3>上海体育大学学报</h3><ul><li><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A1B5gFCaBKxfeejCTgdJHpnO91GLfT1wy8lSNNe6iXiO9XkCaTQZQ0z5zAuQOdEOiNZGSh3Iisrl4NquJCPThJQFbI2cMgylwNaWFnAWYEHVk8nS2m3vwLSJAAmr7mfF4XCpsl23K7xf1ep13g3N18SPdMwFRnSq9UbdET9XNA-Ew==&uniplatform=NZKPT&language=CHS" target="_blank">人工智能时代的体育知识生产：价值审思、伦理边界与风险治理</a><span class="meta"> — 叶超;郭晴;傅维杰;谭广鑫;徐正旭</span></li><li><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A3w3nPxT7pEfPDfyvGwYGdym3hRCNsRTF7y8PURnW1fjNSUktilVfOPqIgeA5d91ZZBPRVyzioWT_iIKPIyRvlCxPAGQJDPxaa9uZvFECRfT9Lhg7uKUeMP3uQUlhrhPIVM3loPE5ek2t6uWzOR7gnGJoQ3QJucZt_miu94KBxQNA==&uniplatform=NZKPT&language=CHS" target="_blank">“人工智能+”如何驱动体育企业创新发展？——基于创新动态能力理论的实证分析</a><span class="meta"> — 李彬;刘亮;张佃波</span></li><li><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A0SzISwynSiD1MtvTnNmsxrcHluqyIcNFUNI2pOdILRQe1pTHVxoyu7oDHxBUSDU2aTY0brk3F6Sdc24QQhFqyKb602AyDVeJZLtoPdH-FKVxF5GDMpFhTfaRYS_YdApdy_u9zj1IYmuNA8VQwpjx3MYr7F1zza6Xz_bIZAgpapZg==&uniplatform=NZKPT&language=CHS" target="_blank">体育低空经济的理论阐释、实践样态与培育策略</a><span class="meta"> — 司马昊翔;徐家俊;戴俭慧</span></li><li><a href="https://kns.cnki.net/kcms2/article/abstract?v=hiwAvoCB7A1qhk1EdG4MLZ8malWBbULqydoAjEBskcLdjNwXSqHQUvAY7qAoJGRkrxIw3isyCOxRSphTuaun6T3ES_YTtQzw1T-sNypIh6n1e1tBYaKu4nLZXTBif1_IV5j6MXbuWvZTapLS_1ltfHA-xZIbOxh6FtDwb4hCPq4ggcEvWhvArA==&uniplatform=NZKPT&language=CHS" target="_blank">重大体育事件战略叙事的表征特点与构建机制</a><span class="meta"> — 郑智巍;张盛;陈佩杰</span></li><li class="more">…另有 11 篇</li></ul></div>
+    </section>
+
+  </div>
+
+  <footer>
+    数据来源：中国知网 CNKI 公开 RSS · 覆盖期刊：体育科学 / 体育文化导刊 / 北京体育大学学报 / 成都体育学院学报 / 广州体育学院学报 / 武汉体育学院学报 / 北京舞蹈学院学报 / 上海体育大学学报<br>
+    本报告由 WorkBuddy 自动生成，Hermes 每日推送至 GitHub Pages · 生成时间 2026-07-20 05:35
+  </footer>
+
+</div>
+</body>
+</html>
