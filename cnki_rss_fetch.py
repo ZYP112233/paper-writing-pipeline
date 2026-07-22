@@ -54,7 +54,7 @@ DANCE_KEYWORDS = [
     "周子骞", "周志平",  # 可扩展：关注的学者
 ]
 
-OUTPUT_DIR = Path(r"C:\Users\54778\Desktop\论文撰写全流程\文献追踪")
+OUTPUT_DIR = Path(__file__).parent / "文献追踪"
 STATE_FILE = OUTPUT_DIR / ".rss_state.json"
 MAX_RETRIES = 3
 RETRY_DELAY = 2  # 秒（指数退避基数）
