@@ -32,7 +32,10 @@ PYTHON = sys.executable
 def collect_reports():
     """扫描所有已生成的报告，返回 [{date, week, year, path, stats, issue_number}]"""
     reports = []
-    for f in sorted(SCRIPT_DIR.glob("文献追踪_*.html"), reverse=True):
+    docs_reports_dir = ROOT / "docs" / "reports"
+    if not docs_reports_dir.exists():
+        return reports
+    for f in sorted(docs_reports_dir.glob("*.html"), reverse=True):
         m = re.search(r"(\d{8})", f.stem)
         if not m:
             continue
